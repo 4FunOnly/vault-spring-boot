@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/4FunOnly/vault-spring-boot/'
+                git branch: 'main', url: "${env.REPO_URL}"
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: "${env.PROJECT_DIR}/target/*.jar", fingerprint: true
+                    archiveArtifacts artifacts: "/target/*.jar", fingerprint: true
                 }
             }
         }
