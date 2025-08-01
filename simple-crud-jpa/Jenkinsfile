@@ -38,10 +38,12 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                 sh """
                 docker push ${env.DOCKER_IMAGE}
                 docker logout
                 """
+                }
             }
         }
 
